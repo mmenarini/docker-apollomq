@@ -1,6 +1,6 @@
 # You know you love it
 FROM ubuntu:14.04
-
+ARG ADMIN_PASSWORD
 # Me, Myself and I
 MAINTAINER Paulo Pires <pjpires@gmail.com>
 
@@ -35,10 +35,12 @@ RUN echo "alias grep='grep --color=auto'" >> /etc/profile
 # Download, extract and install Apollo MQ
 WORKDIR /home/apollo
 USER apollo
-RUN wget -c http://www.eu.apache.org/dist/activemq/activemq-apollo/1.7/apache-apollo-1.7-unix-distro.tar.gz && \
-    tar -zxvf apache-apollo-1.7-unix-distro.tar.gz && \
-    rm apache-apollo-1.7-unix-distro.tar.gz
-RUN apache-apollo-1.7/bin/apollo create mybroker
+RUN wget -c http://www.eu.apache.org/dist/activemq/activemq-apollo/1.7.1/apache-apollo-1.7.1-unix-distro.tar.gz && \
+    tar -zxvf apache-apollo-1.7.1-unix-distro.tar.gz && \
+    rm apache-apollo-1.7.1-unix-distro.tar.gz
+RUN apache-apollo-1.7.1/bin/apollo create mybroker && \
+	sed -i -e 's/password/'"$ADMIN_PASSWORD"'/g' mybroker/etc/users.properties && \
+	sed -i -e 's|/127.0.0.1|/0.0.0.0|g' mybroker/etc/apollo.xml 
 WORKDIR /home/apollo/mybroker
 # TODO remove unsecured endpoints
 EXPOSE 61613 61614 61623 61624 61680 61681
