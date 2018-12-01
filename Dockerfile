@@ -2,7 +2,9 @@
 FROM openjdk:8-slim
 ARG ADMIN_PASSWORD
 # Me, Myself and I
-MAINTAINER Paulo Pires <pjpires@gmail.com>
+# Original author: Paulo Pires <pjpires@gmail.com>
+#Custumized to redcue the size and make the password configurable by Massimiliano Menarini <mmeanrini@ucsd.edu>
+MAINTAINER Massimiliano Menarini <mmeanrini@ucsd.edu>
 
 RUN apt-get update && \
     apt-get upgrade -y && \

@@ -3,11 +3,6 @@ docker-apollomq
 
 This project builds a [docker](http://docker.io/) container for running Apache (ActiveMQ) Apollo message broker. STOMP, AMQP, MQTT, Openwire, SSL, and WebSockets are supported.
 
-It is available in Docker Hub:
-
-```
-docker pull pires/docker-apollomq
-```
 
 ## Build
 
@@ -34,11 +29,22 @@ docker run --name amq1 -p=61614:61614 -p=61624:61624 -p=61681:61681 -d -t apollo
 ```
 
 ## Test
+In our SamrtHome tests we built the docker image with the command
+```
+docker build -t apollomq:1.7.1 --build-arg ADMIN_PASSWORD=SamsungProject .
+```
+and we run it on non-secure prots (to simplify the deployment on embedded hardware with no hardware acceleration for encryption.
 
-Credentials:
+You can access the message broker console form the browser on the pc running docker at address (http:\\localhost:61680)
 ```
 login: admin
-passcode: password
+passcode: SamsungProject
 ```
-
+Your configuration for connecting to MQTT via TCP are:
+```
+username: admin
+password: SamsungProject
+address: <The IP of the server running docker>
+port: 62613
+```
 Connect as you see fit.
