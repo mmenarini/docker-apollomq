@@ -35,7 +35,7 @@ docker build -t apollomq:1.7.1 --build-arg ADMIN_PASSWORD=SamsungProject .
 ```
 and we run it on non-secure prots (to simplify the deployment on embedded hardware with no hardware acceleration for encryption.
 
-You can access the message broker console form the browser on the pc running docker at address (http:\\localhost:61680)
+You can access the message broker console form the browser on the pc running docker at address (http://localhost:61680)
 ```
 login: admin
 passcode: SamsungProject
